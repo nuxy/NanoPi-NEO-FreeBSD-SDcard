@@ -1,0 +1,11 @@
+*
+!.gitignore
+!etc/
+!etc/dhcpd.conf
+!etc/hostapd.conf
+!etc/ifconfig.urtwn0
+!etc/motd
+!etc/mygate
+!etc/rc.conf
+!etc/resolv.conf
+!etc/wpa_supplicant.conf
