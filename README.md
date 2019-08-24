@@ -4,6 +4,15 @@ NetBSD OS service configurations, scripts, and related dependencies.
 
 NetBSD ARM Bootable Images [https://www.invisible.ca/arm](https://www.invisible.ca/arm)
 
+## Dependencies
+
+### `make install`
+
+    /usr/pkgsrc/database/sqlite3
+    /usr/pkgsrc/devel/git
+    /usr/pkgsrc/lang/nodejs
+    /usr/pkgsrc/lang/npm *see workaround
+
 ## Post-install
 
 ### Adding more swap to a running system
@@ -17,6 +26,6 @@ This can also be enabled in [/etc/fstab](etc/fstab)
 ### NPM install workaround
 
     $ cd /usr/pkgsrc/lang/npm
-    $ make configuration
+    $ make configure
     $ cd work/cli-x.x.x/scripts
     $ sh install.sh
