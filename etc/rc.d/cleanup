@@ -1,0 +1,30 @@
+#!/bin/sh
+#
+# $NetBSD: cleanup,v 1.0 2018/08/15 00:00:00 nuxy Exp $
+#
+
+# PROVIDE: cleanup
+# REQUIRE: root
+# KEYWORD: shutdown
+
+$_rc_subr_loaded . /etc/rc.subr
+
+name="cleanup"
+stop_cmd="cleanup_stop"
+
+cleanup_stop()
+{
+	echo -n > /var/log/authlog
+	echo -n > /var/log/cron
+	echo -n > /var/log/lastlog
+	echo -n > /var/log/maillog
+	echo -n > /var/log/messages
+	echo -n > /var/log/secure
+	echo -n > /var/log/xferlog
+
+	rm -f /var/log/*.gz
+	rm -f /var/log/*.out
+}
+
+load_rc_config $name                                                            
+run_rc_command "$1"

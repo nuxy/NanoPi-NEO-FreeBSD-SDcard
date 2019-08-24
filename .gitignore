@@ -7,5 +7,7 @@
 !etc/motd
 !etc/mygate
 !etc/rc.conf
+!etc/rc.d/
+!etc/rc.d/cleanup
 !etc/resolv.conf
 !etc/wpa_supplicant.conf
