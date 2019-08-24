@@ -11,7 +11,7 @@ NetBSD ARM Bootable Images [https://www.invisible.ca/arm](https://www.invisible.
     /usr/pkgsrc/database/sqlite3
     /usr/pkgsrc/devel/git
     /usr/pkgsrc/lang/nodejs
-    /usr/pkgsrc/lang/npm *see workaround
+    /usr/pkgsrc/lang/npm (see workaround)
 
 ## Post-install
 
