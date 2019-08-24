@@ -11,3 +11,4 @@
 !etc/rc.d/cleanup
 !etc/resolv.conf
 !etc/wpa_supplicant.conf
+!README.md
