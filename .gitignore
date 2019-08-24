@@ -2,6 +2,7 @@
 !.gitignore
 !etc/
 !etc/dhcpd.conf
+!etc/fstab
 !etc/hostapd.conf
 !etc/ifconfig.urtwn0
 !etc/motd

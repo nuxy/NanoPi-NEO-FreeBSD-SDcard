@@ -7,4 +7,4 @@ kernfs		/kern		kernfs	rw
 ptyfs		/dev/pts	ptyfs	rw
 procfs		/proc		procfs	rw
 tmpfs		/var/shm	tmpfs	rw,-m1777,-sram%25
-/swap		none		swap	sw,priority=1	0 0
+#/swap		none		swap	sw,priority=0	0 0
