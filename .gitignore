@@ -3,10 +3,13 @@
 !etc/
 !etc/dhcpd.conf
 !etc/fstab
+!etc/group
 !etc/hostapd.conf
 !etc/ifconfig.urtwn0
+!etc/master.passwd
 !etc/motd
 !etc/mygate
+!etc/passwd
 !etc/rc.conf
 !etc/rc.d/
 !etc/rc.d/cleanup
