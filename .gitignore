@@ -1,5 +1,11 @@
 *
 !.gitignore
+!home/
+!home/nanopi-neo/
+!home/nanopi-neo/.setup/
+!home/nanopi-neo/.setup/lan.sh
+!home/nanopi-neo/.setup/lib.sh
+!home/nanopi-neo/.setup/wap.sh
 !etc/
 !etc/dhcpd.conf
 !etc/fstab
