@@ -24,6 +24,7 @@ cleanup_stop()
 
 	rm -f /var/log/*.gz
 	rm -f /var/log/*.out
+	rm -f /var/mail/*
 }
 
 load_rc_config $name                                                            
