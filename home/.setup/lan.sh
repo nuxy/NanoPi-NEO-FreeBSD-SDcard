@@ -92,4 +92,5 @@ disable_service hostapd
 #
 # Enable network services.
 #
+enable_service network
 enable_service wpa_supplicant

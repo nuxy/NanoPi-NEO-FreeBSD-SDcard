@@ -10,6 +10,13 @@ BASE_DIR=/home/nanopi-neo/.setup
 . $BASE_DIR/lib.sh
 
 #
+# Network defaults.
+#
+IP_ADDR=10.0.0.1
+NETMASK=255.255.255.0
+GATEWAY=10.0.0.1
+
+#
 # Accepts script arguments.
 #
 help_menu() {
@@ -40,6 +47,15 @@ do
   esac
 done
 
+if [ -z "$IP_ADDR"  ] ||
+   [ -z "$GATEWAY"  ] ||
+   [ -z "$NETMASK"  ] ||
+   [ -z "$SSID"     ] ||
+   [ -z "$PASSWORD" ]
+then
+  help_menu
+fi
+
 #
 # Disable competing services.
 #
@@ -55,12 +71,17 @@ revert_file /etc/rc.conf
 
 PASSWORD=`psk_gen $SSID $PASSWORD`
 
+update_config "IP_ADDR"  $IP_ADDR  /etc/ifconfig.urtwn0
+update_config "NETMASK"  $NETMASK  /etc/ifconfig.urtwn0
 update_config "SSID"     $SSID     /etc/hostapd.conf
 update_config "PASSWORD" $PASSWORD /etc/hostapd.conf
+
+write_config $GATEWAY /etc/mygate
 
 #
 # Enable network services.
 #
+enable_service network
 enable_service mdnsd
-enable_service dhcpd
 enable_service hostapd
+enable_service dhcpd
