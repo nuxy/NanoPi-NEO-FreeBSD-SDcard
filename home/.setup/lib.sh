@@ -22,7 +22,7 @@ log() {
     chmod 600 $LOG_FILE
   fi
 
-  echo "${date} $1" >> $LOG_FILE
+  echo -e "$(date)\t$1" >> $LOG_FILE
 }
 
 #
@@ -62,7 +62,7 @@ disable_service() {
 #
 enable_service() {
   sed -i "s/$1=NO/$1=YES/g" /etc/rc.conf
-  service $1 onestart
+  service $1 onerestart
 
   log "Enabled service: $1"
 }
