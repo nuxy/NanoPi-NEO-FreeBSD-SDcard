@@ -29,3 +29,12 @@ This can also be enabled in [/etc/fstab](etc/fstab)
     $ make configure
     $ cd work/cli-x.x.x/scripts
     $ sh install.sh
+
+## Reset device password
+
+    boot> boot netbsd -s
+    Enter pathname of shell or RETURN for sh:
+
+    $ mount -uw /
+    $ passwd
+    $ reboot
