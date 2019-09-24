@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $NetBSD: cleanup,v 1.0 2018/08/15 00:00:00 nuxy Exp $
+# $NetBSD: cleanup,v 1.0 2019/08/15 00:00:00 nuxy Exp $
 #
 
 # PROVIDE: cleanup
@@ -17,6 +17,7 @@ cleanup_stop()
 	echo -n > /var/log/authlog
 	echo -n > /var/log/cron
 	echo -n > /var/log/lastlog
+	echo -n > /var/log/lpd-errs
 	echo -n > /var/log/maillog
 	echo -n > /var/log/messages
 	echo -n > /var/log/secure
@@ -27,5 +28,5 @@ cleanup_stop()
 	rm -f /var/mail/*
 }
 
-load_rc_config $name                                                            
+load_rc_config $name
 run_rc_command "$1"
