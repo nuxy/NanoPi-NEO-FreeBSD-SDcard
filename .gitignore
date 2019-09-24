@@ -6,6 +6,7 @@
 !home/nanopi-neo/.setup/lan.sh
 !home/nanopi-neo/.setup/lib.sh
 !home/nanopi-neo/.setup/wap.sh
+!home/nanopi-neo/server/
 !etc/
 !etc/dhcpd.conf
 !etc/fstab
@@ -21,6 +22,7 @@
 !etc/rc.d/cleanup
 !etc/resolv.conf
 !etc/wpa_supplicant.conf
+!var/cron/tabs/root
 !root/
 !root/.login
 !root/.profile
