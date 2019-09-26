@@ -1,0 +1,28 @@
+#!/bin/sh
+#
+# $NetBSD: setpass,v 1.0 2019/09/20 00:00:00 nuxy Exp $
+#
+
+# PROVIDE: setpass
+# REQUIRE: root tty
+# BEFORE:  SERVERS
+
+$_rc_subr_loaded . /etc/rc.subr
+
+name="setpass"
+start_cmd="setpass_start"
+
+setpass_start()
+{
+	insecure=`grep -c 'root:*:0:0::0:0:Charlie' /etc/master.passwd`
+
+	if [ $insecure -eq 1 ]
+	then
+		pass=`/usr/pkg/bin/pwgen | awk '{print $1}'`
+
+		usermod -p `/usr/bin/openssl passwd -1 $pass` nanopi-neo
+	fi
+}
+
+load_rc_config $name
+run_rc_command "$1"
