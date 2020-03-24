@@ -1,4 +1,7 @@
 all:
+	# Install dependencies
+	pkg install -y u-boot-nanopi-neo
+
 	# Fetch OS build sources.
 	svn co svn://svn.freebsd.org/base/release/12.1.0 /usr/src
 
