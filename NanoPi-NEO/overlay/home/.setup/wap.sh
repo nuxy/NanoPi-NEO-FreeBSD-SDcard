@@ -65,14 +65,14 @@ disable_service wpa_supplicant
 # Configure wireless network.
 #
 revert_file /etc/hostapd.conf
-revert_file /etc/ifconfig.urtwn0
+revert_file /etc/ifconfig.wlan0
 revert_file /etc/mygate
 revert_file /etc/rc.conf
 
 PASSWORD=`psk_gen $SSID $PASSWORD`
 
-update_config "IP_ADDR"  $IP_ADDR  /etc/ifconfig.urtwn0
-update_config "NETMASK"  $NETMASK  /etc/ifconfig.urtwn0
+update_config "IP_ADDR"  $IP_ADDR  /etc/ifconfig.wlan0
+update_config "NETMASK"  $NETMASK  /etc/ifconfig.wlan0
 update_config "SSID"     $SSID     /etc/hostapd.conf
 update_config "PASSWORD" $PASSWORD /etc/hostapd.conf
 
@@ -81,7 +81,5 @@ write_config $GATEWAY /etc/mygate
 #
 # Enable network services.
 #
-enable_service network
-enable_service mdnsd
+enable_service netif
 enable_service hostapd
-enable_service dhcpd

@@ -6,18 +6,11 @@ FreeBSD OS service configurations, scripts, and related dependencies.
 
 ### `make install`
 
-    /usr/pkgsrc/databases/sqlite3
-    /usr/pkgsrc/devel/git
-    /usr/pkgsrc/lang/nodejs
-    /usr/pkgsrc/lang/npm (see workaround below)
-    /usr/pkgsrc/sysutils/pwgen
-
-### NPM install workaround
-
-    $ cd /usr/pkgsrc/lang/npm
-    $ make configure
-    $ cd work/cli-x.x.x/scripts
-    $ sh install.sh
+    /usr/ports/databases/sqlite3
+    /usr/ports/devel/git
+    /usr/ports/lang/nodejs
+    /usr/ports/lang/npm
+    /usr/ports/sysutils/pwgen
 
 ## Post-install
 
@@ -31,7 +24,7 @@ This can also be enabled in [/etc/fstab](etc/fstab)
 
 ## Reset device password
 
-    boot> boot netbsd -s
+    boot> boot freebsd -s
     Enter pathname of shell or RETURN for sh:
 
     $ mount -uw /

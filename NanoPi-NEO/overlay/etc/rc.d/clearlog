@@ -1,0 +1,23 @@
+#!/bin/sh
+#
+# $FreeBSD: clearlog,v 1.0 2020/03/21 00:00:00 nuxy Exp $
+#
+
+# PROVIDE: clearlog
+# REQUIRE: log
+# KEYWORD: shutdown
+
+. /etc/rc.subr
+
+name="clearlog"
+start_cmd=":"
+stop_cmd="clearlog_stop"
+rcvar="clear_log_enable"
+
+clearlog_stop()
+{
+	rm -f /var/log/*.gz
+}
+
+load_rc_config $name
+run_rc_command "$1"

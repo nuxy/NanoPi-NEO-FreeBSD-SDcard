@@ -68,15 +68,15 @@ fi
 #
 # Configure wireless network.
 #
-revert_file /etc/ifconfig.urtwn0
+revert_file /etc/ifconfig.wlan0
 revert_file /etc/mygate
 revert_file /etc/rc.conf
 revert_file /etc/wpa_supplicant.conf
 
 PASSWORD=`psk_gen $SSID $PASSWORD`
 
-update_config "IP_ADDR"  $IP_ADDR  /etc/ifconfig.urtwn0
-update_config "NETMASK"  $NETMASK  /etc/ifconfig.urtwn0
+update_config "IP_ADDR"  $IP_ADDR  /etc/ifconfig.wlan0
+update_config "NETMASK"  $NETMASK  /etc/ifconfig.wlan0
 update_config "SSID"     $SSID     /etc/wpa_supplicant.conf
 update_config "PASSWORD" $PASSWORD /etc/wpa_supplicant.conf
 
@@ -85,12 +85,10 @@ write_config $GATEWAY /etc/mygate
 #
 # Disable competing services.
 #
-disable_service mdnsd
-disable_service dhcpd
 disable_service hostapd
 
 #
 # Enable network services.
 #
-enable_service network
+enable_service netif
 enable_service wpa_supplicant

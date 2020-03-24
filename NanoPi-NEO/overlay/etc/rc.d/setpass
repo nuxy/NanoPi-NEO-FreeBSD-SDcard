@@ -1,16 +1,17 @@
 #!/bin/sh
 #
-# $NetBSD: setpass,v 1.0 2019/09/20 00:00:00 nuxy Exp $
+# $FreeBSD: setpass,v 1.0 2020/03/21 00:00:00 nuxy Exp $
 #
 
 # PROVIDE: setpass
-# REQUIRE: root tty
+# REQUIRE: tty
 # BEFORE:  SERVERS
 
-$_rc_subr_loaded . /etc/rc.subr
+. /etc/rc.subr
 
 name="setpass"
 start_cmd="setpass_start"
+stop_cmd=":"
 
 setpass_start()
 {
@@ -18,7 +19,7 @@ setpass_start()
 
 	if [ $insecure -eq 1 ]
 	then
-		pass=`/usr/pkg/bin/pwgen | awk '{print $1}'`
+		pass=`/usr/local/bin/pwgen | awk '{print $1}'`
 
 		usermod -p `/usr/bin/openssl passwd -1 $pass` nanopi-neo
 	fi
