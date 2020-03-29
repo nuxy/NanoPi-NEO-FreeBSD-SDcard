@@ -10,4 +10,6 @@ customize_freebsd_partition() {
     chown -R root:wheel boot
     chown -R root:wheel etc
     chown -R root:wheel home
+
+    chflags schg etc/resolv.conf
 }
