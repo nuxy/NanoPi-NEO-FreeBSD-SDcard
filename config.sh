@@ -5,6 +5,8 @@ option SwapFile 2000mb deferred file=/swap
 option User nanopi-neo
 option UsrPorts
 
+IMGNAME=FreeBSD.img
+
 customize_freebsd_partition() {
     chown    root:wheel /
     chown -R root:wheel boot
