@@ -19,9 +19,7 @@ setpass_start()
 
 	if [ $insecure -eq 1 ]
 	then
-		pass=`/usr/local/bin/pwgen | awk '{print $1}'`
-
-		usermod -p `/usr/bin/openssl passwd -1 $pass` nanopi-neo
+		echo `openssl rand -hex 12` | pw usermod root -h 0
 	fi
 }
 
