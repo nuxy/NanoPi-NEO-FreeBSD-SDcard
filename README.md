@@ -12,15 +12,7 @@ FreeBSD OS service configurations, scripts, and related dependencies.
     /usr/ports/lang/npm
     /usr/ports/sysutils/pwgen
 
-## Post-install
-
-### Add more swap to a running system
-
-    $ dd if=/dev/zero of=/swap bs=1m count=4096
-    $ chmod 600 /swap
-    $ swapctl -a -p 1 /swap
-
-This can also be enabled in [/etc/fstab](etc/fstab)
+## Troubleshooting
 
 ## Reset device password
 
