@@ -1,6 +1,6 @@
 all:
 	# Install dependencies
-	pkg install -y u-boot-nanopi-neo
+	pkg install -y u-boot-nanopi_neo
 
 	# Fetch OS build sources.
 	svn co svn://svn.freebsd.org/base/release/12.1.0 /usr/src
@@ -13,7 +13,9 @@ all:
 
 	# Build the disk image.
 	sh /tmp/crochet/crochet.sh -c config.sh
-	dd if=`ls /tmp/crochet/work/*.img` of=/dev/da1 bs=1m
+
+	# Update the SD card.
+	gpart destroy -F da1 && dd if=`ls /tmp/crochet/work/*.img` of=/dev/da1 bs=1m
 
 	# Cleanup
 	rm -rf /tmp/crochet
