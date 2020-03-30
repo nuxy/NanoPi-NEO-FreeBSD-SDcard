@@ -12,6 +12,7 @@
 name="setpass"
 start_cmd="setpass_start"
 stop_cmd=":"
+rcvar="setpass_enable"
 
 setpass_start()
 {
