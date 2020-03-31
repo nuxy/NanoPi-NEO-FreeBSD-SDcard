@@ -6,12 +6,15 @@ option User nanopi-neo
 option UsrPorts
 
 IMGNAME=FreeBSD.img
+SRCCONF=${PWD}/NanoPi-NEO/overlay/etc/src.conf
 
 customize_freebsd_partition() {
-    chown    root:wheel /
-    chown -R root:wheel boot
-    chown -R root:wheel etc
-    chown -R root:wheel home
+	chown    root:wheel /
+	chown -R root:wheel boot
+	chown -R root:wheel etc
+	chown -R root:wheel home
 
-    chflags schg etc/resolv.conf
+	chflags schg etc/resolv.conf
+
+	rm -f ${SRCCONF}
 }
