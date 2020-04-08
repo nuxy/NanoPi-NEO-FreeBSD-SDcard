@@ -4,13 +4,8 @@ FreeBSD OS service configurations, scripts, and related dependencies.
 
 ## Dependencies
 
-### `make install`
-
-    /usr/ports/databases/sqlite3
-    /usr/ports/devel/git
-    /usr/ports/lang/nodejs
-    /usr/ports/lang/npm
-    /usr/ports/sysutils/pwgen
+- FriendlyElec / [NanoPi NEO V1.4](https://www.friendlyarm.com/index.php?route=product/product&product_id=132) (512 MB RAM)
+- SanDisk Ultra microSDXC UHS-I
 
 ## Troubleshooting
 
