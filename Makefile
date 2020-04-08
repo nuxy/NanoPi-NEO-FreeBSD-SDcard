@@ -2,7 +2,7 @@ BUILD_DIR ?= /tmp/crochet
 
 all:
 	# Install dependencies
-	pkg install -y u-boot-nanopi_neo
+	pkg install -y rsync qemu-user-static u-boot-nanopi_neo u-boot-tools
 
 	# Fetch OS build sources.
 	svn co svn://svn.freebsd.org/base/release/12.1.0 /usr/src
