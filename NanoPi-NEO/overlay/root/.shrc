@@ -1,0 +1,18 @@
+#
+# $FreeBSD: .shrc,v 1.0 2020/04/02 00:00:00 nuxy Exp $
+#
+
+alias h		history 0
+alias j		jobs -l
+alias la	ls -aF
+alias lf	ls -FA
+alias ll	ls -lAF
+
+# A righteous umask
+umask 22
+
+set path = (/sbin /bin /usr/sbin /usr/bin /usr/local/sbin /usr/local/bin)
+
+setenv	EDITOR	vi
+setenv	PAGER	less
+setenv	BLOCKSIZE	K
