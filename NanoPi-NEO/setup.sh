@@ -5,6 +5,7 @@ SUNXI_UBOOT_BIN=u-boot-sunxi-with-spl.bin
 UBOOT_PATH=/usr/local/share/u-boot/${SUNXI_UBOOT}
 TARGET_ARCH=armv7
 FREEBSD_SRC=/usr/src
+FREEBSD_SYS=${FREEBSD_SRC}/sys
 IMAGE_SIZE=$((1000 * 1000 * 1000))
 
 npi_dts_dir=/usr/src/sys/gnu/dts/arm
@@ -28,7 +29,7 @@ allwinner_check_uboot() {
 make_workaround_fdt() {
 	mkdir -p ${WORKDIR}/npi
 
-	cmd=`echo MACHINE=arm /usr/src/sys/tools/fdt/make_dtb.sh ${FREEBSD_SRC}/sys ${npi_dts_full_path} ${WORKDIR}/npi`
+	cmd=`echo MACHINE=arm ${FREEBSD_SYS}/tools/fdt/make_dtb.sh ${FREEBSD_SYS} ${npi_dts_full_path} ${WORKDIR}/npi`
 	sh -c "$cmd"
 	echo $cmd
 
