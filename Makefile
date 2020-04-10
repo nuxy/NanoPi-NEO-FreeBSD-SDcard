@@ -14,9 +14,7 @@ all:
 	ln -s /vagrant/sdcard/NanoPi-NEO $(BUILD_DIR)/board
 
 	# Sync application sources.
-	if [ ! -e NanoPi-NEO/overlay/server ]; do
-		rsync -a -m -R --exclude={.*,src,test} /vagrant/server NanoPi-NEO/overlay
-	fi
+	rsync -a -m --exclude={.*,*.md,test} /vagrant/server NanoPi-NEO/overlay
 
 	# Build the disk image.
 	sh $(BUILD_DIR)/crochet.sh -c config.sh
