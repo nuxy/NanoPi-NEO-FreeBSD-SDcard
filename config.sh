@@ -7,9 +7,10 @@ IMGNAME=FreeBSD.img
 SRCCONF=${PWD}/NanoPi-NEO/overlay/etc/src.conf
 
 customize_freebsd_partition() {
-	pkg install -y u-boot-qemu-arm
+	pkg install -y qemu-user-static
 
 	# Enable kernel binary image activator.
+	binmiscctl remove armelf
 	binmiscctl add armelf --interpreter "/usr/local/bin/qemu-arm-static" --magic "\x7f\x45\x4c\x46\x01\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\x28\x00" --mask "\xff\xff\xff\xff\xff\xff\xff\x00\xff\xff\xff\xff\xff\xff\xff\xff\xfe\xff\xff\xff" --size 20 --set-enabled
 
 	mkdir -p usr/local/bin && cp /usr/local/bin/qemu-arm-static usr/local/bin
