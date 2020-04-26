@@ -1,22 +1,39 @@
-board_setup NanoPi-NEO
+case ${BOARD} in
+	NanoPi-NEO2)
+		TARGET=aarch64
+		;;
+	NanoPi-NEO)
+		TARGET=arm
+		;;
+esac
+
+board_setup ${BOARD}
 
 option ImageSize 1250mb
 option SwapFile 2000mb deferred file=/swap
 
 IMGNAME=FreeBSD.img
-SRCCONF=${PWD}/NanoPi-NEO/overlay/etc/src.conf
+SRCCONF=${PWD}/overlay/etc/src.conf
 
 customize_freebsd_partition() {
 	pkg install -y qemu-user-static
 
 	# Enable kernel binary image activator.
-	binmiscctl remove armelf
-	binmiscctl add armelf --interpreter "/usr/local/bin/qemu-arm-static" --magic "\x7f\x45\x4c\x46\x01\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\x28\x00" --mask "\xff\xff\xff\xff\xff\xff\xff\x00\xff\xff\xff\xff\xff\xff\xff\xff\xfe\xff\xff\xff" --size 20 --set-enabled
+	qemu_static_bin="/usr/local/bin/qemu-${TARGET}-static"
 
-	mkdir -p usr/local/bin && cp /usr/local/bin/qemu-arm-static usr/local/bin
+	case ${TARGET} in
+		aarch64)
+			binmiscctl add arm64 --interpreter ${qemu_static_bin} --magic "\x7f\x45\x4c\x46\x02\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\xb7\x00" --mask "\xff\xff\xff\xff\xff\xff\xff\x00\xff\xff\xff\xff\xff\xff\xff\xff\xfe\xff\xff\xff" --size 20 --set-enabled
+			;;
+		arm)
+			binmiscctl add armelf --interpreter ${qemu_static_bin} --magic "\x7f\x45\x4c\x46\x01\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\x28\x00" --mask "\xff\xff\xff\xff\xff\xff\xff\x00\xff\xff\xff\xff\xff\xff\xff\xff\xfe\xff\xff\xff" --size 20 --set-enabled
+			;;
+	esac
+
+	mkdir -p usr/local/bin && cp ${qemu_static_bin} usr/local/bin
 
 	# SD card image OS/application set-up.
-	chroot . /usr/local/bin/qemu-arm-static /bin/sh <<EOF
+	chroot . ${qemu_static_bin} /bin/sh <<EOF
 		service ldconfig start
 
 		export ASSUME_ALWAYS_YES=yes
@@ -35,5 +52,5 @@ customize_freebsd_partition() {
 		chflags schg /etc/resolv.conf
 EOF
 
-	rm usr/local/bin/qemu-arm-static
+	rm ${qemu_static_bin#?}
 }
