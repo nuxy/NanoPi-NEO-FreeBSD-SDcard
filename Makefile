@@ -12,13 +12,14 @@ all:
 	git clone https://github.com/freebsd/crochet $(BUILD_DIR)
 
 	# Link system sources.
-	ln -s /vagrant/sdcard/$(BOARD) $(BUILD_DIR)/board
+	ln -s $(pwd)/$(BOARD) $(BUILD_DIR)/board
 
 	# Sync application sources.
+	rsync -a -m $(pwd)/overlay $(BUILD_DIR)/board/$(BOARD)
 	rsync -a -m --exclude={.*,*.md,test} /vagrant/server $(BUILD_DIR)/board/$(BOARD)/overlay
 
 	# Build the disk image.
-	BOARD=$(BOARD) sh $(BUILD_DIR)/crochet.sh -c config.sh
+	sh $(BUILD_DIR)/crochet.sh -b $(BOARD) -c config.sh
 
 	# Update the SD card.
 	gpart destroy -F da1 && dd if=$(BUILD_DIR)/work/FreeBSD.img of=/dev/da1 bs=1m
