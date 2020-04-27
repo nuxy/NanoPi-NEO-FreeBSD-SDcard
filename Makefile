@@ -17,8 +17,8 @@ all:
 	# Fetch build tool.
 	git clone https://github.com/freebsd/crochet $(BUILD_DIR)
 
-	# Link system sources.
-	ln -s $(PWD)/$(BOARD) $(BUILD_DIR)/board
+	# Copy board sources.
+	cp -r $(PWD)/$(BOARD) $(BUILD_DIR)/board
 
 	# Sync application sources.
 	rsync -a -m $(PWD)/overlay $(BUILD_DIR)/board/$(BOARD)
