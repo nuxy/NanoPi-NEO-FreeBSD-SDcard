@@ -1,9 +1,15 @@
 BUILD_DIR ?= /tmp/crochet
 BOARD     ?= NanoPi-NEO
 
+.if $(BOARD) == NanoPi-NEO2
+    uboot=u-boot-nanopi-neo2
+.else
+    uboot=u-boot-nanopi_neo
+.endif
+
 all:
-	# Install dependencies
-	pkg install -y rsync u-boot-nanopi_neo u-boot-tools
+	# Install dependencies.
+	pkg install -y rsync u-boot-tools $(uboot)
 
 	# Fetch OS build sources.
 	svn co svn://svn.freebsd.org/base/release/12.1.0 /usr/src
@@ -12,10 +18,10 @@ all:
 	git clone https://github.com/freebsd/crochet $(BUILD_DIR)
 
 	# Link system sources.
-	ln -s $(pwd)/$(BOARD) $(BUILD_DIR)/board
+	ln -s $(PWD)/$(BOARD) $(BUILD_DIR)/board
 
 	# Sync application sources.
-	rsync -a -m $(pwd)/overlay $(BUILD_DIR)/board/$(BOARD)
+	rsync -a -m $(PWD)/overlay $(BUILD_DIR)/board/$(BOARD)
 	rsync -a -m --exclude={.*,*.md,test} /vagrant/server $(BUILD_DIR)/board/$(BOARD)/overlay
 
 	# Build the disk image.
