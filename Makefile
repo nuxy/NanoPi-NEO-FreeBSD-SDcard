@@ -22,7 +22,7 @@ all:
 
 	# Sync application sources.
 	rsync -a -m $(PWD)/overlay $(BUILD_DIR)/board/$(BOARD)
-	rsync -a -m --exclude={.*,*.md,test} /vagrant/server $(BUILD_DIR)/board/$(BOARD)/overlay
+	rsync -a -m --exclude={.*,*.md,test} $(PWD)/../server $(BUILD_DIR)/board/$(BOARD)/overlay
 
 	# Build the disk image.
 	sh $(BUILD_DIR)/crochet.sh -b $(BOARD) -c config.sh
