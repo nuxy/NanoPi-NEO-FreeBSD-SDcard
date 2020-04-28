@@ -19,9 +19,9 @@ all:
 
 	# Copy board sources.
 	cp -r $(PWD)/$(BOARD) $(BUILD_DIR)/board
+	cp -r $(PWD)/overlay  $(BUILD_DIR)/board/$(BOARD)
 
 	# Sync application sources.
-	rsync -a -m $(PWD)/overlay $(BUILD_DIR)/board/$(BOARD)
 	rsync -a -m --exclude={.*,*.md,test} $(PWD)/../server $(BUILD_DIR)/board/$(BOARD)/overlay
 
 	# Build the disk image.
