@@ -30,7 +30,8 @@ allwinner_install_uboot() {
 copy_boot_loader_efi_file() {
 	echo "Installing loader.efi in ${TARGET}"
 
-	cp ${BOARD_FREEBSD_MOUNTPOINT}/boot/loader.efi EFI/BOOT/bootaa64.efi
+	cp ${BOARD_FREEBSD_MOUNTPOINT}/boot/loader.* .
+	mv loader.efi EFI/BOOT/bootaa64.efi
 }
 
 strategy_add $PHASE_PARTITION_LWW allwinner_partition_image
