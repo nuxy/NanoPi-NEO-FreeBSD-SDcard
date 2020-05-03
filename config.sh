@@ -1,15 +1,15 @@
 case ${BOARD} in
 	NanoPi-NEO2)
-		TARGET=aarch64
+		TARGET=aarch64 # A5-Cortex, 64-bit
 		;;
 	NanoPi-NEO)
-		TARGET=arm
+		TARGET=arm # A3-Cortex, 32-bit
 		;;
 esac
 
 board_setup ${BOARD}
 
-option ImageSize 1250mb
+option ImageSize 4000mb
 option SwapFile 2000mb deferred file=/swap
 
 IMGNAME=FreeBSD.img
