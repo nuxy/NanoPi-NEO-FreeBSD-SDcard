@@ -41,8 +41,5 @@ strategy_add $PHASE_FREEBSD_BOARD_INSTALL make_install_boot_scr_file
 # Put the kernel on the FreeBSD UFS partition.
 strategy_add $PHASE_FREEBSD_BOARD_INSTALL board_default_installkernel .
 
-# overlay/etc/fstab mounts the FAT partition at /boot/msdos
-strategy_add $PHASE_FREEBSD_BOARD_INSTALL mkdir -p boot/msdos
-
 # ubldr help and config files go on the UFS partition (after boot dir exists)
 strategy_add $PHASE_FREEBSD_BOARD_INSTALL freebsd_ubldr_copy boot
