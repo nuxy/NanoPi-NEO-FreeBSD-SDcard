@@ -9,7 +9,7 @@ BOARD     ?= NanoPi-NEO
 
 all:
 	# Install dependencies.
-	pkg install -y rsync u-boot-tools $(uboot)
+	pkg install -y rsync sqlite3 u-boot-tools $(uboot)
 
 	# Fetch OS build sources.
 	svn co svn://svn.freebsd.org/base/release/12.1.0 /usr/src
