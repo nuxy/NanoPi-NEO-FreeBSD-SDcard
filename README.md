@@ -12,10 +12,27 @@ FreeBSD OS service configurations, scripts, and related dependencies.
 - SanDisk Ultra microSDXC UHS-I
 
 ## Installation
-  
-Install package dependencies using [gmake](https://www.gnu.org/software/make). 
+
+Install package dependencies using [gmake](https://www.gnu.org/software/make).
 
     $ BOARD=NanoPi-NEO make
+
+## Mounting the SD card
+
+### boot
+
+    $ mount -t msdos /dev/da1s1 /mnt
+
+### freebsd
+
+    $ mount -t ufs /dev/da1s2a /mnt
+
+## Run the ARM environment
+
+    $ cp /usr/local/bin/qemu-${TARGET}-static /mnt/usr/local/bin/qemu-${TARGET}-static
+    $ chroot /mnt /usr/local/bin/qemu-${TARGET}-static /bin/sh
+
+Yommands to do this are outlined [here](https://github.com/nuxy/NanoPi-NEO-FreeBSD-SDcard/-/blob/develop/config.sh#L36).
 
 ## Troubleshooting
 
