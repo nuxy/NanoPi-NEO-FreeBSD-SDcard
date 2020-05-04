@@ -10,7 +10,7 @@ esac
 board_setup ${BOARD}
 
 option ImageSize 4000mb
-option SwapFile 2000mb deferred file=/swap
+option SwapFile 1000mb deferred file=/swap
 
 IMGNAME=FreeBSD.img
 SRCCONF=${PWD}/overlay/etc/src.conf
@@ -38,7 +38,7 @@ customize_freebsd_partition() {
 
 		export ASSUME_ALWAYS_YES=yes
 
-		pkg bootstrap && pkg install git-lite node npm python2 sqlite3
+		pkg bootstrap && pkg install git-lite hostapd node npm python2 sqlite3 wpa_supplicant
 
 		npm install --cwd /server --prefix /server --no-audit --no-optional --unsafe
 
