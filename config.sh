@@ -40,16 +40,17 @@ customize_freebsd_partition() {
 
 		pkg bootstrap && pkg install git-lite hostapd node npm python2 sqlite3 wpa_supplicant
 
-		npm install --cwd /server --prefix /server --no-audit --no-optional --unsafe
-
 		pw groupadd -g 1973 -n nanopi-neo
-		pw useradd  -u 1973 -n nanopi-neo -g nanopi-neo -d /nonexistent -s /sbin/nologin
+		pw useradd  -u 1973 -n nanopi-neo -g nanopi-neo -d /nanopi-neo -s /bin/sh
 
-		chmod 700 /root /server
+		chmod 700 /root /nanopi-neo
 		chown -R root:wheel /
-		chown -R nanopi-neo:nanopi-neo /server
+		chown -R nanopi-neo:nanopi-neo /nanopi-neo
 
 		chflags schg /etc/resolv.conf
+
+		su nanopi-neo -c "npm install --cwd /nanopi-neo/server/app --prefix /nanopi-neo/server/app"
+		su nanopi-neo -c "npm install --cwd /nanopi-neo/server --prefix /nanopi-neo/server"
 EOF
 
 	rm ${qemu_static_bin#?}
