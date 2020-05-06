@@ -32,16 +32,20 @@ customize_freebsd_partition() {
 
 	mkdir -p usr/local/bin && cp ${qemu_static_bin} usr/local/bin
 
+	mount -t devfs devfs dev
+
 	# SD card image OS/application set-up.
 	chroot . ${qemu_static_bin} /bin/sh <<EOF
 		service ldconfig start
 
 		export ASSUME_ALWAYS_YES=yes
 
-		pkg bootstrap && pkg install git-lite hostapd node npm python2 sqlite3 wpa_supplicant
+		pkg bootstrap && pkg install git-lite hostapd libsass node npm python2 sqlite3 wpa_supplicant
 
 		pw groupadd -g 1973 -n nanopi-neo
 		pw useradd  -u 1973 -n nanopi-neo -g nanopi-neo -d /nanopi-neo -s /bin/sh
+
+		rm -rf /home
 
 		chmod 700 /root /nanopi-neo
 		chown -R root:wheel /
@@ -49,9 +53,13 @@ customize_freebsd_partition() {
 
 		chflags schg /etc/resolv.conf
 
-		su nanopi-neo -c "npm install --cwd /nanopi-neo/server/app --prefix /nanopi-neo/server/app"
+		mv /nanopi-neo/server/app /nanopi-neo/app && ln -s /nanopi-neo/app /nanopi-neo/server
+
+		su nanopi-neo -c "npm install --cwd /nanopi-neo/app --prefix /nanopi-neo/app"
 		su nanopi-neo -c "npm install --cwd /nanopi-neo/server --prefix /nanopi-neo/server"
 EOF
+
+	umount dev
 
 	rm ${qemu_static_bin#?}
 }
