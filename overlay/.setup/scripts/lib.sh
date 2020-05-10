@@ -95,7 +95,7 @@ revert_file() {
 }
 
 #
-# Update file matched value.
+# Update file(s) matched value(s).
 #
 # Parameters:
 #   key
@@ -104,13 +104,19 @@ revert_file() {
 #   value
 #     String $2
 #
-#   filename
-#     String $3
+#   filename(s)
+#     String $3,$4 ..
 #
 update_config() {
-  sed -i "s/#$1#/$2/g" $3
+  for file in "$@"
+  do
+    if [ -e $file ]
+    then
+      sed -i "s/#$1#/$2/g" $file
 
-  log "Updated file: $3 (key/value [$1/$2])"
+      log "Updated file: $file (key/value [$1/$2])"
+    fi
+  done
 }
 
 #
