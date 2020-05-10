@@ -66,6 +66,7 @@ then
 fi
 
 if_conf=/etc/ifconfig.wlan0
+ip_conf=/etc/hosts
 ap_conf=/etc/wpa_supplicant.conf
 gateway=/etc/mygate
 
@@ -74,11 +75,12 @@ gateway=/etc/mygate
 #
 revert_file $ap_conf
 revert_file $if_conf
+revert_file $ip_conf
 revert_file $gateway
 
 PASSWORD=`psk_gen $SSID $PASSWORD`
 
-update_config "IP_ADDR"  $IP_ADDR  $if_conf
+update_config "IP_ADDR"  $IP_ADDR  $if_conf $ip_conf
 update_config "NETMASK"  $NETMASK  $if_conf
 update_config "SSID"     $SSID     $ap_conf
 update_config "PASSWORD" $PASSWORD $ap_conf
