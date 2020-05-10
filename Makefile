@@ -33,3 +33,9 @@ all:
 
 	# Cleanup
 	rm -rf $(BUILD_DIR)
+
+neo:
+	BOARD=NanoPi-NEO make all
+
+neo2:
+	BOARD=NanoPi-NEO2 make all

@@ -15,7 +15,7 @@ FreeBSD OS service configurations, scripts, and related dependencies.
 
 Install package dependencies using [gmake](https://www.gnu.org/software/make).
 
-    $ BOARD=NanoPi-NEO make
+    $ make <neo|neo2>
 
 ## Mounting the SD card
 
