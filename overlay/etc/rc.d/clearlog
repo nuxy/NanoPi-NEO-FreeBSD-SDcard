@@ -10,6 +10,7 @@
 . /etc/rc.subr
 
 name="clearlog"
+desc="Remove old logs"
 start_cmd=":"
 stop_cmd="clearlog_stop"
 rcvar="clear_log_enable"

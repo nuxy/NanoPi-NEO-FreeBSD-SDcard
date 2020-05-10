@@ -10,6 +10,7 @@
 . /etc/rc.subr
 
 name="setpass"
+desc="Set root password"
 start_cmd="setpass_start"
 stop_cmd=":"
 rcvar="setpass_enable"
