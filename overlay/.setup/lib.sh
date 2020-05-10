@@ -108,7 +108,7 @@ revert_file() {
 #     String $3
 #
 update_config() {
-  sed -i "s/$1/$2/g" $3
+  sed -i "s/#$1#/$2/g" $3
 
   log "Updated file: $3 (key/value [$1/$2])"
 }
