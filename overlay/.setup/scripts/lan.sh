@@ -3,10 +3,10 @@
 #  lan.sh
 #  Configure wireless networking.
 #
-#  Copyright 2019, Marc S. Brooks (https://mbrooks.info)
+#  Copyright 2020, Marc S. Brooks (https://mbrooks.info)
 #
 
-BASE_DIR=/home/nanopi-neo/.setup
+BASE_DIR=/nanopi-neo/.setup
 . $BASE_DIR/lib.sh
 
 #
@@ -65,22 +65,25 @@ then
   help_menu
 fi
 
+if_conf=/etc/ifconfig.wlan0
+ap_conf=/etc/wpa_supplicant.conf
+gateway=/etc/mygate
+
 #
 # Configure wireless network.
 #
-revert_file /etc/ifconfig.wlan0
-revert_file /etc/mygate
-revert_file /etc/rc.conf
-revert_file /etc/wpa_supplicant.conf
+revert_file $ap_conf
+revert_file $if_conf
+revert_file $gateway
 
 PASSWORD=`psk_gen $SSID $PASSWORD`
 
-update_config "IP_ADDR"  $IP_ADDR  /etc/ifconfig.wlan0
-update_config "NETMASK"  $NETMASK  /etc/ifconfig.wlan0
-update_config "SSID"     $SSID     /etc/wpa_supplicant.conf
-update_config "PASSWORD" $PASSWORD /etc/wpa_supplicant.conf
+update_config "IP_ADDR"  $IP_ADDR  $if_conf
+update_config "NETMASK"  $NETMASK  $if_conf
+update_config "SSID"     $SSID     $ap_conf
+update_config "PASSWORD" $PASSWORD $ap_conf
 
-write_config $GATEWAY /etc/mygate
+write_config $GATEWAY $gateway
 
 #
 # Disable competing services.
