@@ -3,7 +3,7 @@
 #  lib.sh
 #  Shorthand functions of common operations.
 #
-#  Copyright 2019, Marc S. Brooks (https://mbrooks.info)
+#  Copyright 2020, Marc S. Brooks (https://mbrooks.info)
 #
 
 LOG_FILE=/var/log/nanopi-neo.log
