@@ -40,7 +40,7 @@ customize_freebsd_partition() {
 
 		export ASSUME_ALWAYS_YES=yes
 
-		pkg bootstrap && pkg install git-lite hostapd libsass node npm python2 sqlite3 wpa_supplicant
+		pkg bootstrap && pkg install git-lite hostapd libsass node npm python2 sqlite3
 
 		pw groupadd -g 1973 -n nanopi-neo
 		pw useradd  -u 1973 -n nanopi-neo -g nanopi-neo -d /nanopi-neo -s /bin/sh
