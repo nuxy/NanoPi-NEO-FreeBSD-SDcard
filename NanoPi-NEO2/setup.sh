@@ -27,18 +27,19 @@ allwinner_install_uboot() {
 	mkdir -p EFI/BOOT
 }
 
-copy_boot_loader_efi_file() {
+allwinner_loader_efi_copy() {
 	echo "Installing loader.efi in ${TARGET}"
 
-	cp ${BOARD_FREEBSD_MOUNTPOINT}/boot/loader.* .
-	mv loader.efi EFI/BOOT/bootaa64.efi
+	cp boot/loader.* ${BOARD_BOOT_MOUNTPOINT}
+	mv ${BOARD_BOOT_MOUNTPOINT}/loader.efi ${BOARD_BOOT_MOUNTPOINT}/EFI/BOOT/bootaa64.efi
 }
 
 strategy_add $PHASE_PARTITION_LWW allwinner_partition_image
 strategy_add $PHASE_CHECK allwinner_check_uboot
 strategy_add $PHASE_BOOT_INSTALL allwinner_install_uboot
-strategy_add $PHASE_BUILD_OTHER freebsd_loader_efi_build
-strategy_add $PHASE_BOOT_INSTALL copy_boot_loader_efi_file
 
 # Put the kernel on the FreeBSD UFS partition.
 strategy_add $PHASE_FREEBSD_BOARD_INSTALL board_default_installkernel .
+
+# loader files go on the msdos partition (after boot dir exists)
+strategy_add $PHASE_FREEBSD_BOARD_INSTALL allwinner_loader_efi_copy
