@@ -22,7 +22,7 @@ allwinner_check_uboot() {
 	uboot_port_test ${SUNXI_UBOOT} ${SUNXI_UBOOT_BIN}
 }
 
-make_install_boot_scr_file() {
+allwinner_scr_build_copy() {
 	cat << EOF > ${BOARD_BOOT_MOUNTPOINT}/boot.cmd
 echo "Loading U-boot loader: ubldr.bin"
 load \${devtype} \${devnum}:\${distro_bootpart} ${UBLDR_LOADADDR} ubldr.bin
@@ -36,10 +36,12 @@ strategy_add $PHASE_PARTITION_LWW allwinner_partition_image
 strategy_add $PHASE_CHECK allwinner_check_uboot
 strategy_add $PHASE_BUILD_OTHER freebsd_ubldr_build UBLDR_LOADADDR=${UBLDR_LOADADDR}
 strategy_add $PHASE_BOOT_INSTALL freebsd_ubldr_copy_ubldr .
-strategy_add $PHASE_FREEBSD_BOARD_INSTALL make_install_boot_scr_file
 
 # Put the kernel on the FreeBSD UFS partition.
 strategy_add $PHASE_FREEBSD_BOARD_INSTALL board_default_installkernel .
+
+# boot files go on the msdos partition (after boot dir exists)
+strategy_add $PHASE_FREEBSD_BOARD_INSTALL allwinner_scr_build_copy
 
 # ubldr help and config files go on the UFS partition (after boot dir exists)
 strategy_add $PHASE_FREEBSD_BOARD_INSTALL freebsd_ubldr_copy boot
