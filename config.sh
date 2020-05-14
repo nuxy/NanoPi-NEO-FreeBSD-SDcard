@@ -46,7 +46,7 @@ customize_freebsd_partition() {
 		pw groupadd -g 1973 -n nanopi-neo
 		pw useradd  -u 1973 -n nanopi-neo -g nanopi-neo -d /nanopi-neo -s /bin/sh
 
-		rm -rf /home
+		rm -rf /home /etc/make.conf /etc/src.conf
 
 		chmod 700 /root /nanopi-neo
 		chown -R root:wheel /
