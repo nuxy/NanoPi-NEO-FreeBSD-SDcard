@@ -9,10 +9,11 @@ esac
 
 board_setup ${BOARD}
 
-option ImageSize 4000mb
+option ImageSize 3000mb
 option SwapFile 1000mb deferred file=/swap
 
 IMGNAME=FreeBSD.img
+MAKECONF=${PWD}/overlay/etc/make.conf
 SRCCONF=${PWD}/overlay/etc/src.conf
 
 customize_freebsd_partition() {
