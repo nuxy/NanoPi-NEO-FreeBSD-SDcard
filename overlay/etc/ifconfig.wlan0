@@ -1,1 +1,1 @@
-inet IP_ADDR netmask NETMASK
+inet #IP_ADDR# netmask #NETMASK#
