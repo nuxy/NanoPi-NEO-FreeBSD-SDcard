@@ -1,0 +1,8 @@
+*
+!*/etc/hostapd.conf
+!*/etc/ifconfig.wlan0
+!*/etc/ifconfig.wlan1
+!*/etc/mygate
+!*/etc/rc.conf
+!*/etc/wpa_supplicant.conf
+!*/nanopi-neo/.setup

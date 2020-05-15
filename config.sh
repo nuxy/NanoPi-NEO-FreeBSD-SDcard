@@ -58,6 +58,10 @@ customize_freebsd_partition() {
 
 		su nanopi-neo -c "npm install --cwd /nanopi-neo/app --prefix /nanopi-neo/app"
 		su nanopi-neo -c "npm install --cwd /nanopi-neo/server --prefix /nanopi-neo/server"
+
+		git init
+		git add -f /etc/hostapd.conf /etc/ifconfig.* /etc/mygate /etc/rc.conf /etc/wpa_supplicant.conf /nanopi-neo/.setup
+		git commit -m 'Initial set-up'
 EOF
 
 	umount dev
