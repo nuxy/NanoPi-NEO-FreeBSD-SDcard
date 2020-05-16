@@ -97,3 +97,5 @@ disable_service hostapd
 #
 enable_service netif
 enable_service wpa_supplicant
+
+restart_device

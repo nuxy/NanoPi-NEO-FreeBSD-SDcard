@@ -88,3 +88,5 @@ write_config $GATEWAY $gateway
 #
 enable_service netif
 enable_service hostapd
+
+restart_device

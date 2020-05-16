@@ -81,6 +81,13 @@ delete_config() {
 }
 
 #
+# Restart the device.
+#
+restart_device() {
+  shutdown -r now
+}
+
+#
 # Reset filename with system defaults.
 #
 # Parameters:
