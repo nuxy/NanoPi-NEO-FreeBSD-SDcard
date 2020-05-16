@@ -41,12 +41,13 @@ EOF
 # Save configuration state.
 #
 git init
-git add -f /etc/hostapd.conf /etc/ifconfig.* /etc/mygate /etc/rc.conf /etc/wpa_supplicant.conf /nanopi-neo/.setup
+git add -f /etc/hostapd.conf /etc/hosts /etc/ifconfig.* /etc/mygate /etc/rc.conf /etc/wpa_supplicant.conf /nanopi-neo/.setup
 git commit -m 'Initial set-up'
 
 #
-# Cleanup build/unused files.
+# Remove build/unused files.
 #
-rm -rf /etc/make.conf /etc/src.conf
-rm -rf /home /media /mnt /net /proc /usr/share/games /var/games
-rm -rf .profile .snap
+rm -rf .profile .snap \
+	/etc/bluetooth /etc/dma /etc/X11 /etc/mail /etc/make.conf /etc/ppp /etc/src.conf /etc/zfs \
+	/home /media /mnt /net /proc /usr/share/games \
+	/var/at /var/games /var/log/.snap /var/run/ppp /var/spool
