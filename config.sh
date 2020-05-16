@@ -23,8 +23,9 @@ __MAKE_CONF=${PWD}/overlay/etc/make.conf
 customize_freebsd_partition() {
 	pkg install -y qemu-user-static
 
-	# Enable kernel binary image activator.
 	qemu_static_bin="/usr/local/bin/qemu-${TARGET}-static"
+
+	# Enable kernel binary image activator.
 	binmiscctl_args="--interpreter ${qemu_static_bin} --size 20 --set-enabled"
 
 	case ${TARGET} in
