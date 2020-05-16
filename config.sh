@@ -13,8 +13,12 @@ option ImageSize 3000mb
 option SwapFile 1000mb deferred file=/swap
 
 IMGNAME=FreeBSD.img
-MAKECONF=${PWD}/overlay/etc/make.conf
+
+# Build overrides.
 SRCCONF=${PWD}/overlay/etc/src.conf
+
+# Kernel overrides.
+__MAKE_CONF=${PWD}/overlay/etc/make.conf
 
 customize_freebsd_partition() {
 	pkg install -y qemu-user-static
@@ -35,34 +39,8 @@ customize_freebsd_partition() {
 
 	mount -t devfs devfs dev
 
-	# SD card image OS/application set-up.
-	chroot . ${qemu_static_bin} /bin/sh <<EOF
-		service ldconfig start
-
-		export ASSUME_ALWAYS_YES=yes
-
-		pkg bootstrap && pkg install git-lite hostapd libsass node npm python2 sqlite3
-
-		pw groupadd -g 1973 -n nanopi-neo
-		pw useradd  -u 1973 -n nanopi-neo -g nanopi-neo -d /nanopi-neo -s /bin/sh
-
-		rm -rf /home /etc/make.conf /etc/src.conf
-
-		chmod 700 /root /nanopi-neo
-		chown -R root:wheel /
-		chown -R nanopi-neo:nanopi-neo /nanopi-neo
-
-		chflags schg /etc/resolv.conf
-
-		mv /nanopi-neo/server/app /nanopi-neo/app && ln -s /nanopi-neo/app /nanopi-neo/server
-
-		su nanopi-neo -c "npm install --cwd /nanopi-neo/app --prefix /nanopi-neo/app"
-		su nanopi-neo -c "npm install --cwd /nanopi-neo/server --prefix /nanopi-neo/server"
-
-		git init
-		git add -f /etc/hostapd.conf /etc/ifconfig.* /etc/mygate /etc/rc.conf /etc/wpa_supplicant.conf /nanopi-neo/.setup
-		git commit -m 'Initial set-up'
-EOF
+	# Set-up device dependencies.
+	chroot . ${qemu_static_bin} /bin/sh .setup/scripts/make.sh
 
 	umount dev
 
