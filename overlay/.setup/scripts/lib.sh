@@ -47,7 +47,7 @@ psk_gen() {
 #     String $1
 #
 disable_service() {
-  sed -i "s/$1=YES/$1=NO/g" /etc/rc.conf
+  sed -i '' "s/$1=YES/$1=NO/g" /etc/rc.conf
   service $1 onestop
 
   log "Disabled service: $1"
@@ -61,7 +61,7 @@ disable_service() {
 #     String $1
 #
 enable_service() {
-  sed -i "s/$1=NO/$1=YES/g" /etc/rc.conf
+  sed -i '' "s/$1=NO/$1=YES/g" /etc/rc.conf
   service $1 onerestart
 
   log "Enabled service: $1"
@@ -112,7 +112,7 @@ update_config() {
   do
     if [ -e $file ]
     then
-      sed -i "s/#$1#/$2/g" $file
+      sed -i '' "s/#$1#/$2/g" $file
 
       log "Updated file: $file (key/value [$1/$2])"
     fi
