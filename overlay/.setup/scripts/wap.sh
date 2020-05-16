@@ -6,7 +6,7 @@
 #  Copyright 2020, Marc S. Brooks (https://mbrooks.info)
 #
 
-BASE_DIR=/nanopi-neo/.setup
+BASE_DIR=/.setup/scripts
 . $BASE_DIR/lib.sh
 
 #
