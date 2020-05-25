@@ -25,7 +25,7 @@ chflags schg /etc/resolv.conf
 #
 export ASSUME_ALWAYS_YES=yes
 
-pkg bootstrap && pkg install git-lite hostapd libsass node npm python2 sqlite3
+pkg bootstrap && pkg install git-lite hostapd libsass node npm python2 screen sqlite3
 
 #
 # Install NPM application.
