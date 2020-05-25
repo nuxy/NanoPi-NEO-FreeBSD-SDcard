@@ -1,0 +1,35 @@
+#!/bin/sh
+#
+# $FreBSD: nanopi-neo,v 1.0 2020/05/26 00:00:00 nuxy Exp $
+#
+
+# PROVIDE: nanopi-neo
+# REQUIRE: NETWORKING SERVERS DAEMON
+# BEFORE:  LOGIN
+# KEYWORD: shutdown
+
+. /etc/rc.subr
+
+name="nanopi-neo"
+desc="NanoPi-NEO API server"
+base_dir=/nanopi-neo/server
+start_cmd="nanopi-neo_start"
+stop_cmd="nanopi-neo_stop"
+rcvar="nanopi-neo_enable"
+
+nanopi-neo_start()
+{
+	echo "Starting NanoPi-NEO API services."
+
+	su -m nanopi-neo -c "screen -dm /usr/local/bin/npm run start --cwd $base_dir --prefix $base_dir > /dev/null 2>&1"
+}
+
+nanopi-neo_stop()
+{
+	echo "Stopping NanoPi-NEO API services."
+
+	killall -u nanopi-neo
+}
+
+load_rc_config $name
+run_rc_command "$1"
