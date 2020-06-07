@@ -1,7 +1,7 @@
 #!/bin/sh
 #
-#  wap.sh
-#  Configure wireless access point.
+#  hostap.sh
+#  Configure host access point.
 #
 #  Copyright 2020, Marc S. Brooks (https://mbrooks.info)
 #
@@ -10,29 +10,38 @@ BASE_DIR=/.setup/scripts
 . $BASE_DIR/lib.sh
 
 #
-# Network defaults.
-#
-IP_ADDR=10.0.0.1
-NETMASK=255.255.255.0
-GATEWAY=10.0.0.1
-
-#
 # Accepts script arguments.
 #
 help_menu() {
 cat <<EOT
-Usage: wap.sh [-s ssid] [-p password]
+Usage: hostap.sh [-i ip address] [-g gateway] [-n netmask]
+                 [-s ssid] [-p password]
 
 Options:
+  -i : specify the network IP address
+  -g : specify the network gateway IP address
+  -n : specify the network mask IP address
   -s : specify the wireless network SSID
   -p : specify the wireless network password
 EOT
   exit 1
 }
 
-while getopts ":s:p:" opt
+while getopts "i:g:n:s:p:" opt
 do
   case "$opt" in
+    i)
+      IP_ADDR="$OPTARG"
+      ;;
+
+    g)
+      GATEWAY="$OPTARG"
+      ;;
+
+    n)
+      NETMASK="$OPTARG"
+      ;;
+
     s)
       SSID="$OPTARG"
       ;;
@@ -56,15 +65,7 @@ then
   help_menu
 fi
 
-if_conf=/etc/ifconfig.wlan1
-ip_conf=/etc/hosts
 ap_conf=/etc/hostapd.conf
-gateway=/etc/mygate
-
-#
-# Disable competing services.
-#
-disable_service wpa_supplicant
 
 #
 # Configure wireless network.

@@ -22,7 +22,7 @@ log() {
     chmod 600 $LOG_FILE
   fi
 
-  echo -e "$(date)\t$1" >> $LOG_FILE
+  echo -e "$0\t$(date)\t$1" >> $LOG_FILE
 }
 
 #
@@ -62,9 +62,22 @@ disable_service() {
 #
 enable_service() {
   sed -i '' "s/$1=NO/$1=YES/g" /etc/rc.conf
-  service $1 onerestart
+  service $1 onestart
 
   log "Enabled service: $1"
+}
+
+#
+# Restart service by name.
+#
+# Parameters:
+#   name
+#     String $1
+#
+restart_service() {
+  service $1 onerestart
+
+  log "Restarted service: $1"
 }
 
 #
@@ -78,27 +91,6 @@ delete_config() {
   rm -f /etc/$1
 
   log "Removed file: $1"
-}
-
-#
-# Restart the device.
-#
-restart_device() {
-  shutdown -r now
-}
-
-#
-# Reset filename with system defaults.
-#
-# Parameters:
-#   filename
-#     String $1
-#
-revert_file() {
-  git reset HEAD $1
-  git checkout $1
-
-  log "Reverted file: $1"
 }
 
 #
@@ -142,4 +134,27 @@ $1
 EOF
 
   log "Created file: $1"
+}
+
+#
+# Restart the device.
+#
+restart_device() {
+  log "Restarting device";
+
+  shutdown -r now
+}
+
+#
+# Reset filename with system defaults.
+#
+# Parameters:
+#   filename
+#     String $1
+#
+revert_file() {
+  git reset HEAD $1
+  git checkout $1
+
+  log "Reverted file: $1"
 }
