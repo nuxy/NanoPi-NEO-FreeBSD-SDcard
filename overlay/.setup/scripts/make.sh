@@ -51,3 +51,9 @@ rm -rf .profile .snap \
 	/etc/bluetooth /etc/dma /etc/X11 /etc/mail /etc/make.conf /etc/ppp /etc/src.conf /etc/zfs \
 	/home /media /mnt /net /proc /usr/share/games \
 	/var/at /var/games /var/log/.snap /var/run/ppp /var/spool
+
+#
+# Remove unused user/groups.
+#
+pw userdel -y games hast mailnull man news pop smmsp uucp www
+pw groupdel -y dialer ftp hast
