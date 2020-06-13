@@ -25,7 +25,7 @@ chflags schg /etc/resolv.conf
 #
 export ASSUME_ALWAYS_YES=yes
 
-pkg bootstrap && pkg install git-lite hostapd libsass node npm python2 screen sqlite3
+pkg bootstrap && pkg install git-lite hostapd inotify-tools libsass node npm python2 screen sqlite3
 
 #
 # Install NPM application.
@@ -47,10 +47,9 @@ git commit -m 'Initial set-up'
 #
 # Remove build/unused files.
 #
-rm -rf .profile .snap \
-	/etc/bluetooth /etc/dma /etc/X11 /etc/mail /etc/make.conf /etc/ppp /etc/src.conf /etc/zfs \
-	/home /media /mnt /net /proc /usr/share/games \
-	/var/at /var/games /var/log/.snap /var/run/ppp /var/spool
+rm -rf /etc/X11 /etc/make.conf /etc/src.conf /home /media /mnt /net /proc /var/at /var/spool
+
+find . -type d \( -name .snap -o -name bluetooth -o -name dma -o -name games -o -name mail -o -name ppp -o -name zfs \) | xargs rm -rf
 
 #
 # Remove unused user/groups.
