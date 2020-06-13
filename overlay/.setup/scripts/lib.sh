@@ -6,7 +6,7 @@
 #  Copyright 2020, Marc S. Brooks (https://mbrooks.info)
 #
 
-LOG_FILE=/var/log/nanopi-neo.log
+LOG_FILE=/var/log/setup.log
 
 #
 # Log the message to a file.
