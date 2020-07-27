@@ -14,7 +14,9 @@ service ldconfig start
 pw groupadd -g 1973 -n nanopi-neo
 pw useradd  -u 1973 -n nanopi-neo -g nanopi-neo -d /nanopi-neo -s /bin/sh
 
-chmod 700 /root /nanopi-neo
+chmod 755 /.setup/scripts/*.sh
+chmod 700 /nanopi-neo /root
+chmod 666 /nanopi-neo/.setup
 chown -R root:wheel /
 chown -R nanopi-neo:nanopi-neo /nanopi-neo
 
