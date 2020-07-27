@@ -1,0 +1,36 @@
+#!/bin/sh
+#
+# $FreBSD: setup,v 1.1 2020/07/26 00:00:00 nuxy Exp $
+#
+
+# PROVIDE: setup
+# REQUIRE: NETWORKING SERVERS DAEMON
+# BEFORE:  LOGIN
+# KEYWORD: shutdown
+
+. /etc/rc.subr
+
+name="setup"
+desc="Set-up event monitor."
+start_cmd="setup_start"
+stop_cmd="setup_stop"
+rcvar="setup_enable"
+
+setup_start()
+{
+	cmd_file=/nanopi-neo/.setup
+
+	echo "Starting $desc"
+
+	inotifywait -m $cmd_file -e modify | /.setup/scripts/cmd.sh -f $cmd_file &
+}
+
+setup_stop()
+{
+	echo "Stopping $desc"
+
+	killall inotifywait
+}
+
+load_rc_config $name
+run_rc_command "$1"
