@@ -6,6 +6,9 @@
 #  Copyright 2020, Marc S. Brooks (https://mbrooks.info)
 #
 
+BASE_DIR=/.setup/scripts
+. $BASE_DIR/lib.sh
+
 #
 # Accepts script arguments.
 #
@@ -37,16 +40,6 @@ then
   help_menu
 fi
 
-log_file=/var/log/setup.log
-
-#
-# Create output log.
-#
-if [ ! -e $log_file ]
-then
-  touch $log_file
-fi
-
 #
 # Run shell command.
 #
@@ -54,10 +47,16 @@ while read -r file event
 do
   if [ -e $file ]
   then
-    cmd=`echo $line | grep -v '[/\\&|;()^\`<>$]'`
+    cmd=`echo $CMD_FILE | grep -E -v '[/\\&|;()^\`<>$]|\.\.' | grep -E -i -w '^hostap|lan|wpa'`
 
-    cat $CMD_FILE >> $log_file
-    sh  $CMD_FILE >> $log_file 2>&1
+    if [ -z $cmd ]
+    then
+      log "Running command: $cmd"
+
+      trap log "Error" ERR
+
+      sh $cmd
+    fi
 
     truncate -s 0 $CMD_FILE
   fi

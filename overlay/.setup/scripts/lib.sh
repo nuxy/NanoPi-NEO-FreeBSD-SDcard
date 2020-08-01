@@ -140,7 +140,7 @@ EOF
 # Restart the device.
 #
 restart_device() {
-  log "Restarting device";
+  log "Restarting device"
 
   shutdown -r now
 }
