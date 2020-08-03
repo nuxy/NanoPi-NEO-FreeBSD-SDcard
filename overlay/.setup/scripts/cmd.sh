@@ -47,15 +47,15 @@ while read -r file event
 do
   if [ -e $file ]
   then
-    cmd=`echo $CMD_FILE | grep -E -v '[/\\&|;()^\`<>$]|\.\.' | grep -E -i -w '^hostap|lan|wpa'`
+    cmd=`cat $CMD_FILE | grep -E -v '[/\\&|;()^\`<>$]|\.\.' | grep -E -i -w '^hostap|lan|wpa'`
 
-    if [ -z $cmd ]
+    if [ -n "$cmd" ]
     then
-      log "Running command: $cmd"
+      log "Running command ($CMD_FILE)-> $cmd"
 
       trap log "Error" ERR
 
-      sh $cmd
+      sh $BASE_DIR/$cmd
     fi
 
     truncate -s 0 $CMD_FILE
