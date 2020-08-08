@@ -17,17 +17,18 @@ pw useradd  -u 1973 -n nanopi-neo -g nanopi-neo -d /nanopi-neo -s /bin/sh
 chmod 755 /.setup/scripts/*.sh
 chmod 700 /nanopi-neo /root
 chmod 666 /nanopi-neo/.setup
+chmod 555 /etc/rc.d/*
 chown -R root:wheel /
 chown -R nanopi-neo:nanopi-neo /nanopi-neo
 
-chflags schg /etc/resolv.conf
+chflags schg /etc/resolv.conf /usr/local/etc/dhcpd.conf
 
 #
 # Install FreeBSD ports.
 #
 export ASSUME_ALWAYS_YES=yes
 
-pkg bootstrap && pkg install git-lite hostapd inotify-tools libsass node npm python2 screen sqlite3
+pkg bootstrap && pkg install dhcpd git-lite hostapd inotify-tools libsass node npm python2 screen sqlite3
 
 #
 # Install NPM application.
