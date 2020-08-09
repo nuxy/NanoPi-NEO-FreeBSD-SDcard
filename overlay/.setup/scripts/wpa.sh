@@ -53,10 +53,10 @@ ap_conf=/etc/wpa_supplicant.conf
 #
 revert_file $ap_conf
 
-PASSWORD=$(psk_gen $SSID $PASSWORD)
+psk=$(psk_gen $SSID $PASSWORD)
 
-update_config "SSID"     $SSID     $ap_conf
-update_config "PASSWORD" $PASSWORD $ap_conf
+update_config "SSID" $SSID $ap_conf
+update_config "PSK"  $psk  $ap_conf
 
 #
 # Restart network services.
