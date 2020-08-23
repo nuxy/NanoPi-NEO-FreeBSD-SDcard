@@ -1,0 +1,23 @@
+#!/bin/sh
+
+ipfw -q -f flush
+
+cmd="ipfw -q add"
+
+# Interfaces.
+eth="awg0"
+lan="lo0"
+wan="wlan0"
+
+# Restrict Ethernet Interface.
+$cmd 00005 deny all from any to any via $eth
+
+# No restrictions on Loopback Interface.
+$cmd 00010 allow all from any to any via $lan
+
+# Allow inbound SSH connections.
+$cmd 00100 allow tcp from any to me 22 in via $wan setup limit src-addr 22
+
+# Port forwarding.
+$cmd 00200 fwd 127.0.0.1,3000 all from any to me 80 in via $wan keep-state
+$cmd 00201 fwd 127.0.0.1,3000 all from any to me 443 in via $wan keep-state
