@@ -18,6 +18,10 @@ $cmd 00010 allow all from any to any via $lan
 # Allow inbound SSH connections.
 $cmd 00100 allow tcp from any to me 22 in via $wan setup limit src-addr 22
 
+# Allow inbound DNS queries.
+$cmd 00200 allow tcp from any to me 53 in via $wan keep-state
+$cmd 00201 allow udp from any to me 53 in via $wan keep-state
+
 # Port forwarding.
-$cmd 00200 fwd 127.0.0.1,3000 all from any to me 80 in via $wan keep-state
-$cmd 00201 fwd 127.0.0.1,3000 all from any to me 443 in via $wan keep-state
+$cmd 00300 fwd 127.0.0.1,3000 all from any to me 80 in via $wan keep-state
+$cmd 00301 fwd 127.0.0.1,3000 all from any to me 443 in via $wan keep-state
