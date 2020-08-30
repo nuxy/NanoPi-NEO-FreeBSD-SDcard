@@ -28,7 +28,8 @@ chflags schg /etc/resolv.conf /usr/local/etc/dhcpd.conf /usr/local/etc/unbound/u
 #
 export ASSUME_ALWAYS_YES=yes
 
-pkg bootstrap && pkg install dhcpd git-lite hostapd inotify-tools libsass node npm python2 screen sqlite3 unbound
+pkg bootstrap
+pkg install dhcpd git-lite hostapd inotify-tools libsass node npm python2 screen sqlite3 unbound
 
 #
 # Install NPM application.
@@ -41,26 +42,22 @@ su nanopi-neo <<EOF
 EOF
 
 #
-# Update security keys.
-#
-rndc-confgen -a -b 512
-
-#
 # Save configuration state.
 #
 git init
-git add -f /etc/hostapd.conf /etc/hosts /etc/ifconfig.* /etc/mygate /etc/rc.conf /etc/wpa_supplicant.conf /nanopi-neo/.setup
+git add -f /etc/hostapd.conf /etc/hosts /etc/ifconfig.* /etc/mygate /etc/wpa_supplicant.conf /nanopi-neo/.setup
 git commit -m 'Initial set-up'
 
 #
-# Remove build/unused files.
+# Remove unused files/directories.
 #
-rm -rf /etc/X11 /etc/make.conf /etc/src.conf /home /media /mnt /net /proc /var/at /var/spool /var/log/maillog
-
-find . -type d \( -name .snap -o -name bluetooth -o -name dma -o -name games -o -name mail -o -name ppp -o -name zfs \) | xargs rm -rf
+rm -rf .profile .snap \
+	/etc/bluetooth /etc/dma /etc/mail /etc/make.conf /etc/ppp /etc/src.conf /etc/X11 /etc/zfs \
+	/home /media /mnt /net /proc /usr/share/games \
+	/var/at /var/games /var/log/.snap /var/run/ppp /var/spool
 
 #
 # Remove unused user/groups.
 #
-pw userdel -y games hast mailnull man news pop smmsp uucp www
 pw groupdel -y dialer ftp hast
+pw userdel  -y games hast mailnull man news pop smmsp uucp www
