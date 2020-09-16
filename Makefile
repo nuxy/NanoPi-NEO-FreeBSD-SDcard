@@ -2,10 +2,12 @@ BUILD_DIR ?= /tmp/crochet
 BOARD     ?= NanoPi-NEO
 BOARD_DIR ?= $(BUILD_DIR)/board/$(BOARD)
 
+.if $(BOARD) == NanoPi-NEO
+    uboot_pkg_name=u-boot-nanopi_neo
+.endif
+
 .if $(BOARD) == NanoPi-NEO2
     uboot_pkg_name=u-boot-nanopi-neo2
-.else
-    uboot_pkg_name=u-boot-nanopi_neo
 .endif
 
 all:
@@ -14,6 +16,9 @@ all:
 
 	# Fetch OS build sources.
 	svn co svn://svn.freebsd.org/base/release/12.1.0 /usr/src
+
+	# Override DTB installers.
+	cp $(PWD)/$(BOARD)/Makefile /usr/src/sys/modules/dtb/allwinner
 
 	# Fetch build tool.
 	git clone https://github.com/freebsd/crochet $(BUILD_DIR)
