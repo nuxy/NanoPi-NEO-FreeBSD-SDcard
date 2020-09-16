@@ -55,3 +55,9 @@ customize_freebsd_partition() {
 
 	rm ${qemu_static_bin#?}
 }
+
+customize_boot_partition() {
+
+	# Remove unused DTB/overlays.
+	cd dtb && find . ! -name 'allwinner' ! -name 'overlays' ! -name '*nanopi-neo*' ! -name 'sun*i-h*-*.dtbo' -delete
+}
