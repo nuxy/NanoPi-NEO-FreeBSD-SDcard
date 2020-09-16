@@ -1,9 +1,12 @@
 case ${BOARD} in
-	NanoPi-NEO2)
-		TARGET=aarch64 # A5-Cortex, 64-bit
-		;;
 	NanoPi-NEO)
 		TARGET=arm # A3-Cortex, 32-bit
+		;;
+	NanoPi-NEO-Air)
+		TARGET=arm # ..
+		;;
+	NanoPi-NEO2)
+		TARGET=aarch64 # A5-Cortex, 64-bit
 		;;
 esac
 

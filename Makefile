@@ -6,6 +6,10 @@ BOARD_DIR ?= $(BUILD_DIR)/board/$(BOARD)
     uboot_pkg_name=u-boot-nanopi_neo
 .endif
 
+.if $(BOARD) == NanoPi-NEO-Air
+    uboot_pkg_name=u-boot-nanopi_neo_air
+.endif
+
 .if $(BOARD) == NanoPi-NEO2
     uboot_pkg_name=u-boot-nanopi-neo2
 .endif
@@ -41,6 +45,9 @@ all:
 
 neo:
 	BOARD=NanoPi-NEO make all
+
+neo-air:
+	BOARD=NanoPi-NEO-Air make all
 
 neo2:
 	BOARD=NanoPi-NEO2 make all
