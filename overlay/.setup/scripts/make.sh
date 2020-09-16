@@ -59,5 +59,5 @@ rm -rf .profile .snap \
 #
 # Remove unused user/groups.
 #
-pw groupdel -y dialer ftp hast
-pw userdel  -y games hast mailnull man news pop smmsp uucp www
+pw groupdel dialer ftp hast
+pw userdel  games hast mailnull man news pop smmsp uucp www
