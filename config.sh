@@ -51,13 +51,10 @@ customize_freebsd_partition() {
 	# Set-up device dependencies.
 	chroot . ${qemu_static_bin} /bin/sh .setup/scripts/make.sh
 
+	# Remove unused DTB/overlays.
+	find ! -name '*nanopi-neo*' ! -name 'sun*i-h*-*.dtbo' -delete 2> /dev/null
+
 	umount dev
 
 	rm ${qemu_static_bin#?}
-}
-
-customize_boot_partition() {
-
-	# Remove unused DTB/overlays.
-	cd dtb && find . ! -name 'allwinner' ! -name 'overlays' ! -name '*nanopi-neo*' ! -name 'sun*i-h*-*.dtbo' -delete
 }
