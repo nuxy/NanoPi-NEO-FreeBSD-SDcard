@@ -53,3 +53,10 @@ Commands to do this are outlined [here](https://github.com/nuxy/NanoPi-NEO-FreeB
     #dns=dnsmasq
 
     $ service network-manager restart
+
+## Resources
+
+- [Allwinner H3 Quad-Core ARM Cortex-A7](https://sunxi.org/H3)
+- [Allwinner H3 Quad-Core ARM Cortex-A53](https://sunxi.org/H5)
+- [U-Boot](https://github.com/u-boot/u-boot)
+- [FreeBSD/ARM Project](https://www.freebsd.org/platforms/arm.html)
