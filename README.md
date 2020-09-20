@@ -10,7 +10,7 @@ FreeBSD OS service configurations, scripts, and related dependencies.
 
 ## Dependencies
 
-- SanDisk Ultra microSDXC UHS-I
+- SanDisk Ultra microSDXC UHS-I (8 GB)
 
 ## Installation
 
