@@ -12,8 +12,8 @@ esac
 
 board_setup ${BOARD}
 
-option ImageSize 3000mb
-option SwapFile 1000mb deferred file=/swap
+option ImageSize 3072mb
+option SwapFile 1024mb deferred file=/swap
 
 IMGNAME=FreeBSD.img
 
