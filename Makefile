@@ -19,7 +19,7 @@ all:
 	pkg install -y rsync sqlite3 u-boot-tools $(uboot_pkg_name)
 
 	# Fetch OS build sources.
-	svn co svn://svn.freebsd.org/base/release/12.1.0 /usr/src
+	svn co svn://svn.freebsd.org/base/release/12.2.0 /usr/src
 
 	# Override DTB installers.
 	cp $(PWD)/$(BOARD)/Makefile /usr/src/sys/modules/dtb/allwinner
