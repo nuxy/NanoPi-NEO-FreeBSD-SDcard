@@ -12,8 +12,8 @@ esac
 
 board_setup ${BOARD}
 
-option ImageSize 3072mb
-option SwapFile 1024mb deferred file=/swap
+option ImageSize 3000mb
+option SwapFile 1000mb deferred file=/swap
 
 IMGNAME=FreeBSD.img
 
@@ -51,10 +51,15 @@ customize_freebsd_partition() {
 	# Set-up device dependencies.
 	chroot . ${qemu_static_bin} /bin/sh .setup/scripts/make.sh
 
-	# Remove unused DTB/overlays.
-	find boot/dtb/ ! -name '*nanopi-neo*' ! -name 'sun*i-h*-*.dtbo' -delete 2> /dev/null
-
 	umount dev
 
 	rm ${qemu_static_bin#?}
+}
+
+customize_boot_partition() {
+
+	# Remove unused DTB/overlays.
+	if [ -d dtb ]; then
+		find dtb/. ! -name 'allwinner' ! -name 'overlays' ! -name '*nanopi-neo*' ! -name 'sun*i-h*-*.dtbo' -delete
+	fi
 }
