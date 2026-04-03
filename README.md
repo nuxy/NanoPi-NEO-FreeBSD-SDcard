@@ -1,4 +1,4 @@
-# NanoPi-NEO-FreeBSD-SDcard
+# NanoPi-NEO-FreeBSD-SDcard [![NO AI](https://raw.githubusercontent.com/nuxy/no-ai-badge/master/badge.svg)](https://github.com/nuxy/no-ai-badge)
 
 FreeBSD OS service configurations, scripts, and related dependencies.
 
