@@ -1,6 +1,8 @@
 # NanoPi-NEO-FreeBSD-SDcard [![NO AI](https://raw.githubusercontent.com/nuxy/no-ai-badge/master/badge.svg)](https://github.com/nuxy/no-ai-badge)
 
-FreeBSD OS service configurations, scripts, and related dependencies.
+FreeBSD OS [service configurations](#preconfigured-services), scripts, and related dependencies.
+
+![NanoPi-NEO](https://raw.githubusercontent.com/nuxy/NanoPi-NEO-FreeBSD-SDcard/master/NanoPi-NEO.jpg)
 
 ## Supported boards
 
@@ -34,6 +36,14 @@ Install package dependencies using [gmake](https://www.gnu.org/software/make).
     $ chroot /mnt /usr/local/bin/qemu-${TARGET}-static /bin/sh
 
 Commands to do this are outlined [here](https://github.com/nuxy/NanoPi-NEO-FreeBSD-SDcard/blob/master/config.sh#L51).
+
+## Preconfigured services
+
+The following [are enabled on boot](https://github.com/nuxy/NanoPi-NEO-FreeBSD-SDcard/blob/master/overlay/etc/rc.conf#L8) which are responsible for [WPA station/Host AP mode](https://docs.freebsd.org/en/books/handbook/advanced-networking/index.html#network-wireless-ap-wpa) functionality.
+
+- [HostAP](https://docs.freebsd.org/en/books/handbook/advanced-networking/index.html#network-wireless-ap)
+- [DHCP](https://docs.freebsd.org/en/books/handbook/network-servers/index.html#network-dhcp)
+- [Firewall](https://docs.freebsd.org/en/books/handbook/firewalls/index.html#firewalls-ipfw)
 
 ## Troubleshooting
 
