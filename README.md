@@ -33,7 +33,7 @@ Install package dependencies using [gmake](https://www.gnu.org/software/make).
     $ cp /usr/local/bin/qemu-${TARGET}-static /mnt/usr/local/bin/qemu-${TARGET}-static
     $ chroot /mnt /usr/local/bin/qemu-${TARGET}-static /bin/sh
 
-Commands to do this are outlined [here](https://github.com/nuxy/NanoPi-NEO-FreeBSD-SDcard/-/blob/master/config.sh#L52).
+Commands to do this are outlined [here](https://github.com/nuxy/NanoPi-NEO-FreeBSD-SDcard/blob/master/config.sh#L51).
 
 ## Troubleshooting
 
