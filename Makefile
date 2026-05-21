@@ -15,6 +15,10 @@ BOARD_DIR ?= $(BUILD_DIR)/board/$(BOARD)
 .endif
 
 all:
+	@echo "##############################################"
+	@echo "# WARNING: May take up to 6 hours to compile #"
+	@echo "##############################################"
+
 	# Install dependencies.
 	pkg install -y rsync sqlite3 u-boot-tools $(uboot_pkg_name)
 
